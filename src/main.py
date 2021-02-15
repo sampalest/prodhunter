@@ -19,12 +19,14 @@ def main():
     telegram = Telegram(config=config['telegram'])
     pobj = Parser(config=config['amazon'])
 
-    logger.info("Parsing web...")
     try:
+        logger.info("Parsing web...")
+
         stock = pobj.search_by_id()
         if stock:
             logger.info("Sending alert")
             telegram.send(f"{config['telegram']['message']}: {config['amazon'].get('url_mobile', config['amazon']['url'])}")
+
     except Exception as e:
         logger.error(e)
 

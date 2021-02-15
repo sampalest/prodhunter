@@ -8,6 +8,7 @@ coloredlogs = "*"
 requests = "*"
 ruamel-yaml = "*"
 schedule = "*"
+beautifulsoup4 = "*"
 
 [dev-packages]
 flake8 = "*"

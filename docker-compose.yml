@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  amazon_stock:
+    container_name: amazon_stock
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    volumes:
+      - ./config:/app/config
+    env_file: deploy/.env
+    command: /start.sh --config-file config/config.yml
+    restart: unless-stopped
