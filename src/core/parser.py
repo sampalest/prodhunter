@@ -3,9 +3,24 @@ from bs4 import BeautifulSoup
 
 
 class Parser():
-    def __init__(self):
-        self.url = "https://www.amazon.es/Estación-recarga-DualSense-PlayStation-5/dp/B08H97WTBL"
-        self.headers = {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
+    def __init__(self, config):
+        self.url = config['url']
+        self.headers = config['header']
 
-    def download_html(self):
-        r = requests.get(self.url, )
+    def _download_html(self) -> BeautifulSoup:
+        r = requests.get(self.url, headers=self.headers)
+        return BeautifulSoup(r.content, 'html.parser')
+
+    def search_by_id(self, ids: list = ['buy-now-button', 'add-to-cart-button']) -> bool:
+        """
+        Check if product is available
+        :param ids: Search for html ids
+        :return: bool
+        """
+        result = None
+        html = self._download_html()
+
+        for id in ids:
+            result = html.find_all(id=id)
+
+        return True if result else False

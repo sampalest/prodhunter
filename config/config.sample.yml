@@ -1,9 +1,7 @@
 ---
-parser:
+amazon:
   url: 'https://www.amazon.es/blablabla'
-  header: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
-  search: ''
-  price: 0
+  header: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}  
 telegram:
   token: ''
   chatID: ''
