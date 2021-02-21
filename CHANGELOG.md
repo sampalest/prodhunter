@@ -1,3 +1,6 @@
+# 0.2.0
+* Multiproduct
+
 # 0.1.1
 * Docker
 

@@ -1,16 +1,19 @@
+import logging
+
 import requests
+
+from core.settings import TELEGRAM_API_MESSAGE
 from core.exceptions import ResponseErrorException
+
+logger = logging.getLogger(__name__)
+
 
 class Telegram:
     def __init__(self, config: dict):
-        self.token = config['token']
-        self.chat_id = config['chatID']
-        self.api = self._build_api()
-
-    def _build_api(self) -> str:
-        return 'https://api.telegram.org/bot{0}/sendMessage?chat_id={1}'.format(self.token, self.chat_id)
+        self.api = TELEGRAM_API_MESSAGE % (config['token'], config['chatID'])
 
     def send(self, message: str) -> dict:
+        logger.info("Sending message...")
         text_url = f"{self.api}'&parse_mode=Markdown&text={message}"
         response = requests.get(text_url)
 

@@ -1,15 +1,17 @@
 import logging
-
-import requests
+import os
 import time
 
+import requests
 import schedule
+
 from core import init_parser
 from core.parser import Parser
 from telegram import Telegram
 from utils import get_config
 
 logger = logging.getLogger(__name__)
+DEBUG = os.environ.get('DEBUG', False)
 
 def main():
     parser = init_parser()
@@ -20,19 +22,26 @@ def main():
     pobj = Parser(config=config['amazon'])
 
     try:
-        logger.info("Parsing web...")
+        logger.info("Executing...")
+        products = pobj.search_by_id()
+        for product in products:
+            msg: str = config['telegram']['message']
+            name: str = product.get('name', product['url'])
 
-        stock = pobj.search_by_id()
-        if stock:
-            logger.info("Sending alert")
-            telegram.send(f"{config['telegram']['message']}: {config['amazon'].get('url_mobile', config['amazon']['url'])}")
+            logger.info(f"Product stock: {name}")
+            # telegram.send(f"{msg}: {name}\n{product['app']}")
 
     except Exception as e:
         logger.error(e)
 
-if __name__ == "__main__":
-    schedule.every(1).minutes.do(main)
 
-    while True:
-        schedule.run_pending()
-        time.sleep(schedule.idle_seconds())
+if __name__ == "__main__":
+    logger.debug(f"Debug is {DEBUG}")
+
+    if not DEBUG:
+        schedule.every(1).minutes.do(main)
+        while True:
+            schedule.run_pending()
+            time.sleep(schedule.idle_seconds())
+    else:
+        main()
