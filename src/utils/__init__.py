@@ -5,7 +5,8 @@ import re
 import requests
 from ruamel.yaml import YAML
 
-from core.settings import AMAZON_ES
+from core.settings import AMAZON_ES, Pages
+from core.exceptions import ObjectDoesNotExist
 
 logger = logging.getLogger(__name__)
 
@@ -49,6 +50,6 @@ def get_product(url: str) -> str:
     finally:
         # Remove final slash
         if app_dir[-1] == '/':
-           app_dir = app_dir[:-1] 
+            app_dir = app_dir[:-1]
 
-    return app_dir 
+    return app_dir

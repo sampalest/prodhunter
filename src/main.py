@@ -5,8 +5,7 @@ import time
 import requests
 import schedule
 
-from core import init_parser
-from core.parser import Parser
+from core import init_parser, get_object_type
 from telegram import Telegram
 from utils import get_config
 
@@ -19,20 +18,21 @@ def main():
     config = get_config(path=args.config_file)
 
     telegram = Telegram(config=config['telegram'])
-    pobj = Parser(config=config['amazon'])
 
-    try:
-        logger.info("Executing...")
-        products = pobj.search_by_id()
-        for product in products:
-            msg: str = config['telegram']['message']
-            name: str = product.get('name', product['url'])
+    for web, cfg in config['webs'].items():
+        pobj = get_object_type(otype=web, config=cfg)
 
-            logger.info(f"Product stock: {name}")
-            # telegram.send(f"{msg}: {name}\n{product['app']}")
+        try:
+            products = pobj.search_by_id()
+            for product in products:
+                msg: str = config['telegram']['message']
+                name: str = product.get('name', product['url'])
 
-    except Exception as e:
-        logger.error(e)
+                logger.info(f"Product stock: {name}")
+                telegram.send(f"{msg}: {name}\n{product['app']}")
+
+        except Exception as e:
+            logger.error(e)
 
 
 if __name__ == "__main__":

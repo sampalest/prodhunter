@@ -8,4 +8,10 @@ class ParseRequestException(Exception):
     """
     Raise when response is not OK
     """
-    pass    
+    pass
+
+class ObjectDoesNotExist(Exception):
+    """
+    Raise when object does not exist
+    """
+    pass

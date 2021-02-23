@@ -1,5 +1,5 @@
 # Prodhunter
-This project search for products y notifies when a product is available.
+This project search for products and notifies when a product is available.
 
 ## Allowed webs
 * Amazon ES
