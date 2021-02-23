@@ -1,11 +1,20 @@
 ---
-amazon:
-  urls: # Product URL 
+webs:
+  mediamarkt:
+    - url: 'https://www.mediamarkt.es/es/product/<<prod>>.html'
+      name: 'My super product'
+    - url: 'https://www.mediamarkt.es/es/product/<<prod>>.html'
+      name: 'My super product 2'
+  eci:
+    - url: 'https://www.elcorteingles.es/....'
+      name: 'My super product'
+    - url: 'https://www.elcorteingles.es/....'
+      name: 'My super product 2'
+  amazon:
     - url: 'https://www.amazon.es/dp/<<product-id>>'
       name: 'My super product'
     - url: 'https://www.amazon.es/<<amazon-prod-name>>/dp/<<product-id>>'
       name: 'My super product 2'
-  header: {'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36'}
 telegram:
   token: '0000000000:supertelegramtoken'
   chatID: 'chatid'

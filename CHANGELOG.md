@@ -1,3 +1,10 @@
+# 0.3.0
+* Abstract parser
+* Multipage
+    * Amazon
+    * ECI
+    * MediaMarkt
+
 # 0.2.0
 * Multiproduct
 
