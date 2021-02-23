@@ -1,8 +1,13 @@
-# Prodhunter
+<p align="center">
+  <img src=".github/hunter.png" width="300" />
+</p>
+
 This project search for products and notifies when a product is available.
 
 ## Allowed webs
-* Amazon ES
+* Amazon ES: `amazon`
+* El Corte Inglés: `eci`
+* Media Markt: `mediamarkt`
 
 ## Config file
 To configure this script, just complete this file with your credentials and products url.

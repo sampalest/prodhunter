@@ -108,4 +108,5 @@ venv.bak/
 .idea
 
 # Project
+design/
 config/config.yml
