@@ -7,9 +7,9 @@ This project search for products and notifies when a product is available.
 ## Allowed webs
 * Amazon ES: `amazon`
 * El Corte Inglés: `eci`
-* Media Markt: `mediamarkt`
-* Worten: `worten`
-* Game: `game`
+* Media Markt ES: `mediamarkt`
+* Worten ES: `worten`
+* Game ES: `game`
 
 ## Config file
 To configure this script, just complete this file with your credentials and products url.
@@ -76,3 +76,6 @@ cp .env.sample .env
 # Project root...
 docker-compose up -d
 ```
+
+## Version
+0.3.2
