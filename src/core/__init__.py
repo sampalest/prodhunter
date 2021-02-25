@@ -3,7 +3,7 @@ import logging
 import os
 from argparse import Namespace
 from multiprocessing import Pool
-from parser.pages import ECI, Amazon, MediaMarkt
+from parser.pages import ECI, Amazon, Game, MediaMarkt, Worten
 
 from telegram import Telegram
 from utils import str2bool
@@ -42,6 +42,12 @@ def get_object_type(otype: str, config: dict) -> object:
 
     elif otype == Pages.MEDIAMARKT:
         pobj = MediaMarkt(config=config)
+
+    elif otype == Pages.WORTEN:
+        pobj = Worten(config=config)
+
+    elif otype == Pages.GAME:
+        pobj = Game(config=config)
 
     if not otype:
         raise ObjectDoesNotExist(f"{otype} does not exist...")

@@ -1,3 +1,8 @@
+# 0.3.2
+* New pages:
+    * Worten
+    * Game
+
 # 0.3.1
 * Multiprocess
 

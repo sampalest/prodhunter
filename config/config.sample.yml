@@ -1,5 +1,9 @@
 ---
 webs:
+  worten:
+    ...
+  game:
+    ...
   mediamarkt:
     - url: 'https://www.mediamarkt.es/es/product/<<prod>>.html'
       name: 'My super product'

@@ -7,6 +7,7 @@ from parser import Parser
 
 logger = logging.getLogger(__name__)
 
+
 class Amazon(Parser):
     def __init__(self, config):
         super(Amazon, self).__init__(config)
@@ -26,7 +27,8 @@ class Amazon(Parser):
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
+                logger.error(
+                    f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for id in self.ids:
@@ -36,6 +38,7 @@ class Amazon(Parser):
                 self.products.append(dict(url=url, name=name, app=app))
 
         return self.products
+
 
 class ECI(Parser):
     def __init__(self, config):
@@ -55,7 +58,8 @@ class ECI(Parser):
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
+                logger.error(
+                    f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for class_ in self.class_:
@@ -66,6 +70,7 @@ class ECI(Parser):
                 self.products.append(dict(url=url, name=name, app=url))
 
         return self.products
+
 
 class MediaMarkt(Parser):
     def __init__(self, config):
@@ -87,7 +92,8 @@ class MediaMarkt(Parser):
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
+                logger.error(
+                    f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for id in self.ids:
@@ -95,5 +101,67 @@ class MediaMarkt(Parser):
 
             if result:
                 self.products.append(dict(url=url, name=name, app=app))
+
+        return self.products
+
+
+class Game(Parser):
+    def __init__(self, config):
+        super(Game, self).__init__(config)
+        self.class_ = ['buy-button']
+
+    def search_by_id(self):
+        result = None
+
+        for item in self.urls:
+            url = item['url']
+            name = item.get('name', '')
+
+            logger.info(f"[{self.__class__.__name__}] Parsing... {name}")
+
+            try:
+                html = self.download_html(url)
+
+            except ParseRequestException:
+                logger.error(
+                    f"[{self.__class__.__name__}] Request error for name {name}")
+                continue
+
+            for class_ in self.class_:
+                result = html.find_all('a', class_)
+
+            if result:
+                self.products.append(dict(url=url, name=name, app=url))
+
+        return self.products
+
+
+class Worten(Parser):
+    def __init__(self, config):
+        super(Worten, self).__init__(config)
+        self.class_ = ['qa-product-options__add-cart-linkto']
+
+    def search_by_id(self):
+        result = None
+
+        for item in self.urls:
+            url = item['url']
+            name = item.get('name', '')
+
+            logger.info(f"[{self.__class__.__name__}] Parsing... {name}")
+
+            try:
+                html = self.download_html(url)
+
+            except ParseRequestException:
+                logger.error(
+                    f"[{self.__class__.__name__}] Request error for name {name}")
+                continue
+
+            for class_ in self.class_:
+                result = html.find_all('button', class_)
+
+            if result:
+                self.products.append(dict(url=url, name=name, app=url))
 
         return self.products

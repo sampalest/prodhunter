@@ -4,7 +4,7 @@ from enum import Enum
 # Settings
 DEBUG = bool(os.environ.get('DEBUG', False))
 MULTIPROCESSING = bool(os.environ.get('MULTIPROCESSING', False))
-TELEGRAM_SEND = bool(os.environ.get('TELEGRAM_SEND', False))
+TELEGRAM_SEND = bool(os.environ.get('TELEGRAM_SEND', True))
 
 # Schedule Time (minutes)
 SCHEDULE_TIME = os.environ.get('SCHEDULE_TIME', 1)
@@ -23,3 +23,4 @@ class Pages(str, Enum):
     MEDIAMARKT = 'mediamarkt'
     WORTEN = 'worten'
     ECI = 'eci'
+    GAME = 'game'

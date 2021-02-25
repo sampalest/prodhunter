@@ -8,6 +8,8 @@ This project search for products and notifies when a product is available.
 * Amazon ES: `amazon`
 * El Corte Inglés: `eci`
 * Media Markt: `mediamarkt`
+* Worten: `worten`
+* Game: `game`
 
 ## Config file
 To configure this script, just complete this file with your credentials and products url.
@@ -16,6 +18,10 @@ To configure this script, just complete this file with your credentials and prod
 ```yaml
 ---
 webs:
+  worten:
+    ...
+  game:
+    ...
   mediamarkt:
     - url: 'https://www.mediamarkt.es/es/product/<<prod>>.html'
       name: 'My super product'
@@ -36,6 +42,12 @@ telegram:
   chatID: 'chatid'
   message: 'Product stock' # General message for telegram chat
 ```
+
+## Env variables
+* DEBUG: `Disable scheduler`
+* MULTIPROCESSING: `1 core vs multicore`
+* TELEGRAM_SEND: `Use telegram sender`
+* SCHEDULE_TIME: `Execution time`
 
 ## Run
 1. Install packages: 
