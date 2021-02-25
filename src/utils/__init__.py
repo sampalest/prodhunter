@@ -34,7 +34,7 @@ def get_config(path: str) -> dict:
     return cdata
 
 
-def get_product(url: str) -> str:
+def get_product(url: str, class_: str = 'amazon') -> str:
     """
     Get product ID
     :param url:
@@ -42,8 +42,13 @@ def get_product(url: str) -> str:
     """
     app_dir: str = url
     try:
-        dp = re.search('(dp/.*/|dp/.*)', url)
-        app_dir = f'{AMAZON_ES}/{dp.group(0)}'
+        if class_ == Pages.AMAZON:
+            dp = re.search('(dp/.*/|dp/.*)', url)
+            app_dir = f'{AMAZON_ES}/{dp.group(0)}'
+
+        elif class_ == Pages.MEDIAMARKT:
+            app_dir = url.replace('_', '')
+
     except Exception as e:
         logger.error(e)
 

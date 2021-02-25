@@ -20,13 +20,13 @@ class Amazon(Parser):
             name = item.get('name', '')
             app = get_product(url)
 
-            logger.info(f"[Amazon] Parsing... {name}")
+            logger.info(f"[{self.__class__.__name__}] Parsing... {name}")
 
             try:
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[Amazon] Request error for name {name}")
+                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for id in self.ids:
@@ -49,13 +49,13 @@ class ECI(Parser):
             url = item['url']
             name = item.get('name', '')
 
-            logger.info(f"[ECI] Parsing... {name}")
+            logger.info(f"[{self.__class__.__name__}] Parsing... {name}")
 
             try:
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[ECI] Request error for name {name}")
+                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for class_ in self.class_:
@@ -78,20 +78,22 @@ class MediaMarkt(Parser):
         for item in self.urls:
             url = item['url']
             name = item.get('name', '')
+            clss = self.__class__.__name__.lower()
+            app = get_product(url, class_=clss)
 
-            logger.info(f"[MediaMarkt] Parsing... {name}")
+            logger.info(f"[{self.__class__.__name__}] Parsing... {name}")
 
             try:
                 html = self.download_html(url)
 
             except ParseRequestException:
-                logger.error(f"[Amazon] Request error for name {name}")
+                logger.error(f"[{self.__class__.__name__}] Request error for name {name}")
                 continue
 
             for id in self.ids:
                 result = html.find_all(id=id)
 
             if result:
-                self.products.append(dict(url=url, name=name, app=url))
+                self.products.append(dict(url=url, name=name, app=app))
 
         return self.products

@@ -18,7 +18,7 @@ class Parser(ABC):
     def download_html(self, url: str) -> BeautifulSoup:
         """
         This function download html code
-        :param url:
+        :param url: page URL
         """
         r = requests.get(url, headers=self.headers)
 

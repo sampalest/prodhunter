@@ -1,3 +1,6 @@
+# 0.3.1
+* Multiprocess
+
 # 0.3.0
 * Abstract parser
 * Multipage
